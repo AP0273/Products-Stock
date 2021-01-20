@@ -29,4 +29,12 @@ public class StockProduct {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "StockProduct{" +
+                "Quantidade=" + amount +
+                ", Data=" + date +
+                '}';
+    }
 }

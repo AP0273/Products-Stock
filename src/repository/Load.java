@@ -12,6 +12,7 @@ import java.util.*;
 
 
 public class Load {
+    static int total_amount = 0;
     protected ArrayList<Products> products;
     public static final String splitcsvregex = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
     public void run() {
@@ -32,8 +33,8 @@ public class Load {
 
                 String[] row = line.split(splitcsvregex);
 
-                records.add(new Products(Integer.parseInt(row[0].trim()), row[21],randomstockinsert()));
-
+                records.add(new Products(Integer.parseInt(row[0].trim()), row[21],randomstockinsert(),total_amount));
+                total_amount=0;
             }
 
             this.setProducts(records);
@@ -78,7 +79,9 @@ public class Load {
         Queue<StockProduct> stock = new LinkedList<>();
         int iterations = randomIntBetween(1,20);
         for(int i = 0; i<iterations; i++) {
-            stock.add(new StockProduct(randomIntBetween(1, 100), randomDate(2020, 2021)));
+            int random_amount = randomIntBetween(1, 100);
+            stock.add(new StockProduct(random_amount, randomDate(2020, 2021)));
+        total_amount += random_amount;
         }
         return stock;
     }

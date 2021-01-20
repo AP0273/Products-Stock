@@ -22,6 +22,9 @@ public class ProductController {
 
         return null;
     }
+    public void saveProduct(Products product){
+     products.set(product.getId(),product);
+    }
 
     public ArrayList<Products> findByNameRootsWay(String targetName) {
 
