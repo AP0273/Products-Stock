@@ -2,6 +2,7 @@ package repository;
 
 import model.Products;
 import model.StockProduct;
+import utilities.FileChooserCSV;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,10 +15,15 @@ import java.util.*;
 public class Load {
     static int total_amount = 0;
     protected ArrayList<Products> products;
+    private FileChooserCSV filechooser = new FileChooserCSV();
     public static final String splitcsvregex = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
-    public void run() {
+    public void load() {
 
-        String csvpath = System.getProperty("user.dir")+"\\Products.csv";
+        String csvpath = filechooser.getCsvPath();
+        if(csvpath == "Error") {
+            System.err.println("Arquivo não selecionado ou incompatível a extensão deve ser CSV");
+        System.exit(0);
+        }
         BufferedReader br = null;
         String line = "";
 

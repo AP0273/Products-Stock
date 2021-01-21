@@ -12,7 +12,7 @@ public class Application {
     public static void main(String[] args) {
 
         Load data = new Load();
-        data.run();
+        data.load();
         controller = new ProductController(data.getProducts());
         menu();
     }
