@@ -15,23 +15,23 @@ import java.util.*;
 public class Load {
     static int total_amount = 0;
     protected ArrayList<Products> products;
-    private FileChooserCSV filechooser = new FileChooserCSV();
-    public static final String splitcsvregex = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
+    private final FileChooserCSV filechooser = new FileChooserCSV();
+    public static final String splitcsvregex = ",(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
     public void load() {
 
         String csvpath = filechooser.getCsvPath();
-        if(csvpath == "Error") {
+        if(csvpath.equals("Error")) {
             System.err.println("Arquivo não selecionado ou incompatível a extensão deve ser CSV");
         System.exit(0);
         }
         BufferedReader br = null;
-        String line = "";
+        String line;
 
         try {
-            ArrayList<Products> loaded = new ArrayList();
+            ArrayList<Products> loaded = new ArrayList<>();
 
             br = new BufferedReader(new FileReader(csvpath));
-            csvSplitter(br.readLine());
+            csvLineSplitter(br.readLine());
 
             while ((line = br.readLine()) != null) {
 
@@ -60,15 +60,9 @@ public class Load {
         }
     }
 
-    private static void csvSplitter(String firstLine) {
+    private static void csvLineSplitter(String line) {
 
-        String[] SplitedFirstLine = firstLine.split(splitcsvregex);
-
-        for (int i = 0; i < SplitedFirstLine.length; i++) {
-//            System.out.print("\t\t" + i);
-//            System.out.print(" : "+SplitedFirstLine[i]);
-        }
-
+        String[] SplitedLine = line.split(splitcsvregex);
     }
 
     public ArrayList<Products> getProducts() {
