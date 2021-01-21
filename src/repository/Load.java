@@ -28,7 +28,7 @@ public class Load {
         String line = "";
 
         try {
-            ArrayList<Products> records = new ArrayList();
+            ArrayList<Products> loaded = new ArrayList();
 
             br = new BufferedReader(new FileReader(csvpath));
             csvSplitter(br.readLine());
@@ -39,11 +39,11 @@ public class Load {
 
                 String[] row = line.split(splitcsvregex);
 
-                records.add(new Products(Integer.parseInt(row[0].trim()), row[21],randomstockinsert(),total_amount));
+                loaded.add(new Products(Integer.parseInt(row[0].trim()), row[21],randomstockinsert(),total_amount));
                 total_amount=0;
             }
 
-            this.setProducts(records);
+            this.setProducts(loaded);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
