@@ -17,6 +17,9 @@ public class Load {
     protected ArrayList<Products> products;
     private final FileChooserCSV filechooser = new FileChooserCSV();
     public static final String splitcsvregex = ",(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
+    static int daycounter = 0;
+    static int monthcounter = 1;
+    static int yearcounter = 2021;
     public void load() {
 
         String csvpath = filechooser.getCsvPath();
@@ -86,10 +89,16 @@ public class Load {
         return stock;
     }
     public static LocalDate randomDate(int startYear, int endYear) {
-        int day = randomIntBetween(1, 28);
-        int month = randomIntBetween(1, 12);
-        int year = randomIntBetween(startYear, endYear);
-        return LocalDate.of(year, month, day);
+        daycounter++;
+        if(daycounter > 28) {
+            daycounter = 1;
+            monthcounter++;
+        }
+        if(monthcounter > 12) {
+            monthcounter = 1;
+            yearcounter++;
+        }
+        return LocalDate.of(yearcounter, monthcounter, daycounter);
     }
 
 
